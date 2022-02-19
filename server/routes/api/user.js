@@ -3,7 +3,6 @@ const {
     getById,
     getAll,
     getStat,
-    deleteu,
 } = require('../../controllers/user.js')
 
 const router = require('express').Router()

@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const slug = require("mongoose-slug-updater");
+const mongoose = require('mongoose');
+
+const slug = require('mongoose-slug-updater');
 
 mongoose.plugin(slug);
 
@@ -11,9 +12,9 @@ const categorySchema = new mongoose.Schema({
     slug: {
         type: String,
         unique: true,
-        slug: "name",
+        slug: 'name',
     },
 
 });
 
-module.exports = mongoose.model("Category", categorySchema);
+module.exports = mongoose.model('Category', categorySchema);
