@@ -1,7 +1,9 @@
-const role = require('./role.js')
+const isAdmin = require('./index.js')
 const auth = require('./auth.js')
+const isUserOrAdmin = require('./isUserOrAdmin.js')
 
 module.exports = {
-    role,
-    auth
+    isAdmin,
+    auth,
+    isUserOrAdmin
 }

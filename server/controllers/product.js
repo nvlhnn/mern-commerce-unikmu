@@ -109,7 +109,7 @@ const update = async (req, res) => {
 const destroy = async (req, res) => {
 
     try {
-        const product = await Product.findByIdAndDelete(req.params.id)
+        await Product.findByIdAndDelete(req.params.id)
 
         res.status(200).json("data has been deleted")
 

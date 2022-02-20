@@ -71,7 +71,7 @@ const update = async (req, res) => {
 const destroy = async (req, res) => {
 
     try {
-        const category = await Category.findByIdAndDelete(req.params.id)
+        await Category.findByIdAndDelete(req.params.id)
 
         res.status(200).json("data has been deleted")
 

@@ -9,11 +9,11 @@ const {
 const router = require('express').Router()
 const middleware = require('../../middleware')
 
-router.post('/', [middleware.auth, middleware.role], create)
+router.post('/', [middleware.auth, middleware.isAdmin], create)
 router.get('/:slug', get)
 router.get('/', getAll)
-router.put('/:id', [middleware.auth, middleware.role], update)
-router.delete('/:id', [middleware.auth, middleware.role], destroy)
+router.put('/:id', [middleware.auth, middleware.isAdmin], update)
+router.delete('/:id', [middleware.auth, middleware.isAdmin], destroy)
 
 
 module.exports = router
