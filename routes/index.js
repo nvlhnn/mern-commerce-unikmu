@@ -4,9 +4,9 @@ const authRoutes = require("./api/auth");
 const userRoutes = require("./api/user");
 const productRoutes = require("./api/product");
 const categoryRoutes = require("./api/category");
-const cartRoutes = require("./api/Cart");
-const orderRoutes = require("./api/Order");
-const colorRoutes = require("./api/Color");
+const cartRoutes = require("./api/cart");
+const orderRoutes = require("./api/order");
+const colorRoutes = require("./api/color");
 
 // auth routes
 router.use("/auth", authRoutes);
