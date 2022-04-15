@@ -239,10 +239,11 @@ const List = () => {
   };
 
   useEffect(() => {
+    const base_url = window.location.origin;
     let url = cat
-      ? `http://localhost:5000/api/products?limit=${limit}&
+      ? `${base_url}/api/products?limit=${limit}&
       sortBy=${sort}&cat=${cat}&`
-      : `http://localhost:5000/api/products?limit=${limit}&sortBy=${sort}&`;
+      : `${base_url}/api/products?limit=${limit}&sortBy=${sort}&`;
     if (search && search !== "") {
       url += "keyword=" + search + "&";
     }
