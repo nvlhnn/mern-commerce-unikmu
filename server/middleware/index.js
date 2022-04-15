@@ -1,4 +1,4 @@
-const isAdmin = require('./index.js')
+const isAdmin = require('./isAdmin.js')
 const auth = require('./auth.js')
 const isUserOrAdmin = require('./isUserOrAdmin.js')
 

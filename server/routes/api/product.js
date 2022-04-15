@@ -9,7 +9,7 @@ const {
 const router = require('express').Router()
 const middleware = require('../../middleware')
 
-router.get('/:id', get)
+router.get('/:slug', get)
 router.get('/', getAll)
 router.post('/', [middleware.auth, middleware.isAdmin], create)
 router.put('/:id', [middleware.auth, middleware.isAdmin], update)

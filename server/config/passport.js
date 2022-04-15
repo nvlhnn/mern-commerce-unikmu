@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 
 const User = mongoose.model('User');
+// eslint-disable-next-line no-undef
 const secret = process.env.JWT_SEC;
 
 const opts = {};

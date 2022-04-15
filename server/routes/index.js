@@ -6,6 +6,7 @@ const productRoutes = require('./api/product');
 const categoryRoutes = require('./api/category');
 const cartRoutes = require('./api/Cart');
 const orderRoutes = require('./api/Order');
+const colorRoutes = require('./api/Color');
 
 
 // auth routes
@@ -15,6 +16,7 @@ router.use('/products', productRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/carts', cartRoutes);
 router.use('/orders', orderRoutes);
+router.use('/colors', colorRoutes);
 
 
 
