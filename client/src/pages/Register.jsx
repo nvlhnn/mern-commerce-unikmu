@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { publicRequest } from "../requestMethod";
 // import { mobile } from "../responsive";
 
 const Container = styled.div`
@@ -58,26 +61,84 @@ const Button = styled.button`
 `;
 
 const Register = () => {
-    return (
-        <Container>
-            <Wrapper>
-                <Title>CREATE AN ACCOUNT</Title>
-                <Form>
-                    <Input placeholder="name" />
-                    <Input placeholder="last name" />
-                    <Input placeholder="username" />
-                    <Input placeholder="email" />
-                    <Input placeholder="password" />
-                    <Input placeholder="confirm password" />
-                    <Agreement>
-                        By creating an account, I consent to the processing of my personal
-                        data in accordance with the <b>PRIVACY POLICY</b>
-                    </Agreement>
-                    <Button>CREATE</Button>
-                </Form>
-            </Wrapper>
-        </Container>
-    );
+  const [inputs, setInputs] = useState({});
+  const confirm = document.getElementsByName("confirmPassword")[0];
+  const form = document.querySelector("#form");
+  const navigate = useNavigate();
+  useEffect(() => {}, [inputs]);
+
+  const onChange = (e) => {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      inputs.password?.length > 0 &&
+      inputs.confirmPassword?.length > 0 &&
+      inputs.password !== inputs.confirmPassword
+    ) {
+      confirm.setCustomValidity("Passwords do not match");
+    } else if (
+      inputs.password?.length > 0 &&
+      inputs.confirmPassword?.length > 0 &&
+      inputs.password == inputs.confirmPassword
+    ) {
+      confirm.setCustomValidity("");
+    }
+
+    const valid = form.reportValidity();
+    if (valid) {
+      const regist = async () => {
+        const res = await publicRequest.post("auth/register", inputs);
+        return res.status;
+      };
+
+      regist();
+      navigate("/login");
+    }
+  };
+
+  return (
+    <Container>
+      <Wrapper>
+        <Title>CREATE AN ACCOUNT</Title>
+        <Form id="form">
+          <Input
+            type={"text"}
+            placeholder="name"
+            name="name"
+            onChange={onChange}
+          />
+          <Input
+            type={"email"}
+            placeholder="email"
+            name="email"
+            onChange={onChange}
+          />
+          <Input
+            type={"password"}
+            placeholder="password"
+            name="password"
+            onChange={onChange}
+          />
+          <Input
+            type={"password"}
+            placeholder="confirm password"
+            name="confirmPassword"
+            onChange={onChange}
+            oninvalid="this.setCustomValidity('Enter User Name Here')"
+            oninput="this.setCustomValidity('')"
+          />
+          <Agreement>
+            By creating an account, I consent to the processing of my personal
+            data in accordance with the <b>PRIVACY POLICY</b>
+          </Agreement>
+          <Button onClick={handleSubmit}>CREATE</Button>
+        </Form>
+      </Wrapper>
+    </Container>
+  );
 };
 
 export default Register;

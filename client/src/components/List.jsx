@@ -6,7 +6,7 @@ import {
   ArrowDropDown,
   KeyboardArrowDown,
 } from "@material-ui/icons";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Products from "../components/Products";
@@ -17,7 +17,7 @@ import { useMediaQuery } from "react-responsive";
 import { deviceSize } from "./Responsive";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { publicRequest } from "../requestMethod";
+import { BASE_URL, publicRequest } from "../requestMethod";
 import { useDispatch, useSelector } from "react-redux";
 import { update } from "../redux/searchRedux";
 
@@ -239,28 +239,31 @@ const List = () => {
   };
 
   useEffect(() => {
-    const base_url = window.location.origin;
+    // const base_url = window.location.origin;
+    // const base_url = "http://localhost:5000";
     let url = cat
-      ? `${base_url}/api/products?limit=${limit}&
-      sortBy=${sort}&cat=${cat}&`
-      : `${base_url}/api/products?limit=${limit}&sortBy=${sort}&`;
+      ? `${BASE_URL}/products?limit=${limit}&sortBy=${sort}&cat=${cat}&`
+      : `${BASE_URL}/products?limit=${limit}&sortBy=${sort}&`;
+
+    console.log(url);
     if (search && search !== "") {
       url += "keyword=" + search + "&";
     }
     if (filterSize && filterSize !== "") {
       url += "size=" + filterSize + "&";
     }
+
     if (filterColor && filterColor !== "") {
       url += "color=" + filterColor + "&";
     }
+
     if (minPrice && minPrice !== "") {
       url += "minPrice=" + minPrice + "&";
     }
+
     if (maxPrice && maxPrice !== "") {
       url += "maxPrice=" + maxPrice + "&";
     }
-
-    console.log({ url, filterColor, filterSize });
 
     const getProducts = async () => {
       try {

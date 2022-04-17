@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { login } from "../redux/apiCalls";
@@ -56,7 +57,7 @@ const Button = styled.button`
   margin-bottom: 10px;
 `;
 
-const Link = styled.a`
+const Register = styled.a`
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;
@@ -69,13 +70,10 @@ const Login = () => {
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
 
-
   const handleClick = (e) => {
     e.preventDefault();
     login(dispatch, { email, password });
-
   };
-
 
   return (
     <Container>
@@ -94,8 +92,10 @@ const Login = () => {
           <Button onClick={handleClick} disabled={isFetching}>
             LOGIN
           </Button>
-          <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          {/* <Register>DO NOT YOU REMEMBER THE PASSWORD?</Register> */}
+          <Register>
+            <Link to={"/register"}>CREATE A NEW ACCOUNT</Link>
+          </Register>
         </Form>
       </Wrapper>
     </Container>

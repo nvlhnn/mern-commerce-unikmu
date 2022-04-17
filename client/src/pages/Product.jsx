@@ -128,6 +128,8 @@ const Product = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  console.log(product);
+
   const handleSubmit = () => {
     if (!token) {
       navigate("/login", {
@@ -164,12 +166,6 @@ const Product = () => {
       product.data[index].stocks.filter((a) => a.stock > 0).map((a) => a.size)
     );
   }, [index, product]);
-
-  // const getAvaibleSize = (product) => {
-  //     product.data[index].stocks
-  //         .filter((a) => a.stock > 0)
-  //         .map((a) => a.size)
-  // }
 
   const handler = (idx) => {
     setIndex(idx);

@@ -35,7 +35,7 @@ const App = () => {
   }, [user]);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter forceRefresh>
       <MainRoute />
     </BrowserRouter>
   );

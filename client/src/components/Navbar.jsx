@@ -158,12 +158,20 @@ const Navbar = () => {
     dispatch(update(value));
   };
 
-  const handleLogout = () => {
+  const handleUser = () => {
     // window.snap.pay("4460cda4-b926-4ce4-8da5-c9314322825b");
     if (user) {
-      // logoutMethod(dispatch);
+      // UserMethod(dispatch);
       navigate("/transactions");
+    } else {
+      navigate("/login");
     }
+  };
+
+  const handleCatClick = (a) => {
+    isMobile && setOpen(false);
+    navigate(`/products/${a.slug}`);
+    window.location.reload();
   };
 
   const navItems = () => {
@@ -183,16 +191,20 @@ const Navbar = () => {
           </Link>
         )}
         {categories.map((a) => (
-          <Link key={a.slug} to={`/products/${a.slug}`}>
-            <CategoryItem
-              className={
-                "nav-item " + (loccat == a.slug ? "md:bg-prime-dark-30" : "")
-              }
-              onClick={() => isMobile && setOpen(false)}
-            >
-              {a.name}
-            </CategoryItem>
-          </Link>
+          // <Link
+          //   key={a.slug}
+          //   to={`/products/${a.slug}`}
+          //   onClick={() => window.location.reload()}
+          // >
+          <CategoryItem
+            className={
+              "nav-item " + (loccat == a.slug ? "md:bg-prime-dark-30" : "")
+            }
+            onClick={() => handleCatClick(a)}
+          >
+            {a.name}
+          </CategoryItem>
+          // </Link>
         ))}
       </CategoryContainer>
     );
@@ -225,7 +237,7 @@ const Navbar = () => {
                 <Person
                   className="cursor-pointer ml-4 text-gray-200"
                   style={{ fontSize: 35 }}
-                  onClick={handleLogout}
+                  onClick={handleUser}
                 />
                 {/* <div className="dropdown absolute group-hover:block hidden rounded bg-white border-prime-300 border-2 p-2">
                   <Link className="mx-2" to={`/transactions`}>
