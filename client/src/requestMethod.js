@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 const url = window.location;
 let BASE_URL;
 if (url.hostname == "localhost") {
-  BASE_URL = url.protocol + "//" + url.hostname + ":5000/api/"; // (or whatever)
+  BASE_URL = url.protocol + "//" + url.hostname + ":5000/api"; // (or whatever)
 } else {
-  BASE_URL = url.origin + "api";
+  BASE_URL = url.origin + "/api";
 }
 
 export { BASE_URL };
