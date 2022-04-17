@@ -23,9 +23,9 @@ app.use(routes);
 // ______________deployment_____________
 // __dirname = path.resolve();
 // if (process.env.NODE_ENV == "production") {
-app.use(express.static("client/build"));
+app.use(__dirname, express.static("client/build"));
 
-app.get("/*", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
 });
 // }

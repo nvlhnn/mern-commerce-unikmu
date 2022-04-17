@@ -9,17 +9,17 @@ const orderRoutes = require("./api/order");
 const colorRoutes = require("./api/color");
 
 // auth routes
-router.use("/auth", authRoutes);
-router.use("/users", userRoutes);
-router.use("/products", productRoutes);
-router.use("/categories", categoryRoutes);
-router.use("/carts", cartRoutes);
-router.use("/orders", orderRoutes);
-router.use("/colors", colorRoutes);
+router.use("/api/auth", authRoutes);
+router.use("/api/users", userRoutes);
+router.use("/api/products", productRoutes);
+router.use("/api/categories", categoryRoutes);
+router.use("/api/carts", cartRoutes);
+router.use("/api/orders", orderRoutes);
+router.use("/api/colors", colorRoutes);
 
-router.use("/api", router);
+// router.use("/api", router);
 
 // router.get('api/user/stat', (req, res) => res.status(200).json('ok'))
-router.get("/api", (req, res) => res.status(404).json("No API route found"));
+// router.get("/api", (req, res) => res.status(404).json("No API route found"));
 
 module.exports = router;
