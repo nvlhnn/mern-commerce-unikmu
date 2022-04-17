@@ -17,13 +17,20 @@ const generateMidtransToken = async (req, res) => {
     const tax = (subTotal * 10) / 100;
     const orderTotal = subTotal + tax;
     const items = cart.products.map((a) => {
+      let name;
+      if (a.productId.name.length > 50) {
+        name = a.productId.name.substring(0, 47) + "...";
+      } else {
+        name = a.productId.name;
+      }
       return {
         id: a.productId.id,
         price: +a.productId.price,
         quantity: +a.qty,
-        name: a.productId.name,
+        name: name,
       };
     });
+    console.log(items);
 
     items.push({
       name: "Tax",
@@ -31,8 +38,13 @@ const generateMidtransToken = async (req, res) => {
       quantity: 1,
       id: "tax-" + order._id,
     });
+    console.log(items);
 
-    // console.log(req.user);
+    let total = items
+      .map((a) => a.price * a.quantity)
+      .reduce((curr, tot) => curr + tot, 0);
+
+    console.log(orderTotal, total);
     const params = {
       transaction_details: {
         order_id: order._id,
@@ -143,7 +155,7 @@ const generateMidtransToken = async (req, res) => {
       .toDate();
     await order.save();
     // await cart.remove();
-
+    console.log(token);
     res.status(200).json({ token: token, orderId: order._id });
   } catch (error) {
     res.status(500).json(error);

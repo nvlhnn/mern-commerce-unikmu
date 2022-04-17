@@ -231,6 +231,7 @@ const Cart = () => {
       window.snap.show();
       getSnapToken()
         .then((a) => {
+          console.log(a);
           window.snap.pay(a.data.token, {
             onSuccess: function (result) {
               destroyCart(token);
