@@ -41,10 +41,10 @@ const generateMidtransToken = async (req, res) => {
       shipping_address: address,
       item_details: items,
       customer_details: {
-        first_name: req.user.username,
+        first_name: req.user.name,
         email: req.user.email,
         shipping_address: {
-          first_name: req.user.username,
+          first_name: req.user.name,
           email: req.user.email,
           address: address,
         },
