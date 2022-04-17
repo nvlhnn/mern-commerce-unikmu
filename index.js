@@ -25,10 +25,12 @@ __dirname = path.resolve();
 if (process.env.NODE_ENV == "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));
 
-  app.use("*", (req, res) => {
+  app.use("/*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "/client/build", "index.html"));
   });
 }
+
+// app.get("/*", (req, res) => res.send("Index Page"));
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("conected to port 5000");
