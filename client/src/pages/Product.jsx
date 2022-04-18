@@ -66,8 +66,10 @@ const DetailWrapper = tw.div`
 const Title = tw.div` 
     text-left
     font-extrabold
-    text-2xl
+    md:text-2xl
+    text-lg
     capitalize
+    mb-2
 `;
 
 const ChoiceContainer = tw.div`
@@ -89,7 +91,8 @@ const Price = tw.div`
     font-extrabold
     text-left 
     mt-3
-    text-2xl
+    md:text-2xl
+    text-xl
 `;
 
 const AddCart = tw.button`
@@ -287,7 +290,7 @@ const Product = () => {
               </OptionWrapper>
             </ChoiceContainer>
             <Price>
-              <span className="text-xl font-bold">Rp. </span>
+              <span className="text-xl md:text-lg font-bold">Rp. </span>
               {product.price.toLocaleString()}
             </Price>
             <AddCart

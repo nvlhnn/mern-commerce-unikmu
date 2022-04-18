@@ -73,7 +73,7 @@ const FilterContainer = tw.div`
     flex
     justify-between
     sticky
-    top-[10vh]
+    top-[7vh]
     bg-white
     // rounded
     px-5

@@ -15,18 +15,19 @@ import styled from "styled-components";
 import { categories } from "../data";
 import { Link } from "react-router-dom";
 
-const Container = styled.div` 
-    z-index: 1;
-    ${tw`
+const Container = styled.div`
+  z-index: 1;
+  ${tw`
         w-full
-        h-[90vh]
+        h-[93vh]
+        md:h-[90vh]
         // z-10
         // position[relative]
     `}
-`
+`;
 const Slide = styled.div`
-    background-image: url(${(props) => props.bg});
-    ${tw`
+  background-image: url(${(props) => props.bg});
+  ${tw`
         text-center
         text-base
         bg-blue-300
@@ -39,11 +40,11 @@ const Slide = styled.div`
         bg-center
         bg-cover
     `}
-`
+`;
 
 const TextContainer = styled.div`
-    text-shadow: 0 0 5px black;
-    ${tw`
+  text-shadow: 0 0 5px black;
+  ${tw`
         mx-5
         text-center
         text-white
@@ -53,7 +54,7 @@ const TextContainer = styled.div`
         capitalize
         text-base
     `}
-`
+`;
 
 const Button = tw.button`
     text-base
@@ -73,47 +74,47 @@ const Button = tw.button`
     transition 
     ease-in-out
     duration-300
-`
+`;
 export default function App() {
+  // const slides = []
 
-    // const slides = []
+  // for (let index = 0; index < array.length; index++) {
+  //     slides.push(
+  //         <SwiperSlide tag={Slide}>im</SwiperSlide>
+  //     )
 
-    // for (let index = 0; index < array.length; index++) {
-    //     slides.push(
-    //         <SwiperSlide tag={Slide}>im</SwiperSlide>
-    //     )
-
-    // }
-    return (
-        <>
+  // }
+  return (
+    <>
+      <Swiper
+        direction={"vertical"}
+        slidesPerView={1}
+        mousewheel={true}
+        pagination={{ clickable: true }}
+        modules={[Mousewheel, Pagination]}
+        className="mySwiper"
+        tag={Container}
+      >
+        {categories.map((item) => (
+          <SwiperSlide key={item.id}>
             <Swiper
-                direction={"vertical"}
-                slidesPerView={1}
-                mousewheel={true}
-                pagination={{ clickable: true }}
-                modules={[Mousewheel, Pagination]}
-                className="mySwiper"
-                tag={Container}
+              className="mySwiper2"
+              pagination={{ clickable: true }}
+              modules={[Pagination]}
+              tag={Container}
             >
-                {categories.map((item) => (
-                    <SwiperSlide key={item.id}>
-                        <Swiper
-                            className="mySwiper2"
-                            pagination={{ clickable: true }}
-                            modules={[Pagination]}
-                            tag={Container}>
-                            {item.images.map((data, index) => (
-                                <SwiperSlide tag={Slide} key={index} bg={data.img}>
-                                    <TextContainer>{data.desc}</TextContainer>
-                                    <Link to={`/products/${item.slug}`}>
-                                        <Button>shop now</Button>
-                                    </Link>
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                    </SwiperSlide>
-                ))}
+              {item.images.map((data, index) => (
+                <SwiperSlide tag={Slide} key={index} bg={data.img}>
+                  <TextContainer>{data.desc}</TextContainer>
+                  <Link to={`/products/${item.slug}`}>
+                    <Button>shop now</Button>
+                  </Link>
+                </SwiperSlide>
+              ))}
             </Swiper>
-        </>
-    );
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </>
+  );
 }

@@ -24,7 +24,8 @@ const Container = styled.div`
   ${tw`
         bg-prime-dark-20
         // z-50
-        h-[10vh]
+        h-[7vh]
+        md:h-[10vh]
         w-full
         px-4
         sticky
@@ -51,7 +52,7 @@ const Logo = tw.h1`
 
 const Right = tw.div`
     flex
-    items-end
+    items-center
 `;
 
 const CategoryContainer = tw.div`
@@ -123,9 +124,10 @@ const CategoryOverlay = styled(motion.div)`
 
 const HambContainer = tw.div`
     position[relative]
-    top-1.5
+    top-0.5
     ml-4
     text-gray-200
+    
 `;
 
 const Navbar = () => {
@@ -250,7 +252,7 @@ const Navbar = () => {
           {isMobile && (
             <Search
               className="cursor-pointer ml-4 text-gray-200 "
-              style={{ fontSize: 35 }}
+              style={{ fontSize: 32 }}
               onClick={handleSearch}
             />
           )}
@@ -259,13 +261,13 @@ const Navbar = () => {
               <ShoppingCart
                 count={76}
                 className="cursor-pointer ml-4 text-gray-200"
-                style={{ fontSize: 35 }}
+                style={{ fontSize: 30 }}
               />
             </Badge>
           </Link>
           {isMobile && (
             <HambContainer>
-              <Hamburger toggled={isOpen} toggle={setOpen} />
+              <Hamburger toggled={isOpen} size={28} toggle={setOpen} />
             </HambContainer>
           )}
         </Right>

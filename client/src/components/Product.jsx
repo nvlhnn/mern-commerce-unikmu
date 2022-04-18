@@ -6,12 +6,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Container = tw.div`
     
-    -mb-16
-    md:mb-5
+    // -mb-16
+    mb-5
     lg:mb-10
     flex
     flex-col
-    h-[400px]
+    md:h-[400px]
+    h-[300px]
     // md:h-[300px]
     md:h-auto
     max-w-[100%]
@@ -22,6 +23,7 @@ const Container = tw.div`
     mx-2
     items-center
     // content-around
+    
 `;
 
 const Image = tw.img`
@@ -36,11 +38,12 @@ const Image = tw.img`
 const Info = tw.div`
     flex
     flex-col
-    justify-between
+    md:justify-between
+    // justify-start
     // items-center
     text-center
     mt-3
-    h-full
+    md:h-full
 `;
 const Category = tw.div`
     text-sm
@@ -51,7 +54,8 @@ const Category = tw.div`
 `;
 
 const Title = tw.div`
-    text-base
+    md:text-base
+    text-sm
     font-extrabold
     mt-1
     capitalize
@@ -118,7 +122,11 @@ export const Product = ({ item }) => {
           className="flex justify-center "
           to={`/products/detail/${item.slug}`}
         >
-          <Title>{item.name}</Title>
+          <Title>
+            {item.name.length > 30
+              ? item.name.substring(0, 27) + "..."
+              : item.name}
+          </Title>
         </Link>
         <Price>Rp. {item.price.toLocaleString()}</Price>
       </Info>
