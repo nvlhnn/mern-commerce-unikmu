@@ -217,7 +217,7 @@ const Navbar = () => {
       <Container>
         <Left>
           <Link to={"/"}>
-            <Logo>UNIKLO</Logo>
+            <Logo>UNIKMU</Logo>
           </Link>
           {!isMobile && categories && navItems()}
         </Left>

@@ -350,7 +350,7 @@ const List = () => {
                 id="search-input"
                 defaultValue={search}
                 onKeyPress={(e) => e.key === "Enter" && handleSearch()}
-                autoFocus
+                // autoFocus
               />
               <Search className="text-gray-900 ml-2" onClick={handleSearch} />
             </SearchContainer>
