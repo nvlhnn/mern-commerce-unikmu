@@ -164,12 +164,11 @@ const Cart = () => {
   useEffect(() => {
     if (cart) {
       setCartExceed(
-        cart.products.find(
+        cart.products?.find(
           (a) =>
             a.qty >
-            a.productId.data
-              .find((b) => b.code == a.code)
-              .stocks.find((c) => c.size == a.size).stock
+            a.productId.data?.find((b) => b.code == a.code)
+              .stocks?.find((c) => c.size == a.size).stock
         ) != null
       );
     }
@@ -231,26 +230,22 @@ const Cart = () => {
       window.snap.show();
       getSnapToken()
         .then((a) => {
-          console.log(a);
           window.snap.pay(a.data.token, {
             onSuccess: function (result) {
               destroyCart(token);
               dispatch(getCart(token));
               navigate("/transactios/detail/" + a.data.orderId);
-              console.log("SUCCESS", result);
             },
             onPending: function (result) {
               destroyCart(token);
               dispatch(getCart(token));
               navigate("/transactions/detail/" + a.data.orderId);
-              console.log("Payment pending", result);
             },
             onError: function () {
               deleteOrder(token, user, a.data.orderId);
-              console.log("Payment error");
             },
             onClose: function () {
-              deleteOrder(token, user, a.data.orderId);
+              // deleteOrder(token, user, a.data.orderId);
               dispatch(getCart(token));
               alert("you closed the popup without finishing the payment");
             },
@@ -261,9 +256,8 @@ const Cart = () => {
   }, [address]);
 
   const getCurrentStock = (item) => {
-    return item.productId.data
-      .find((a) => a.code == item.code)
-      ["stocks"].find((a) => a.size == item.size).stock;
+    return item.productId.data?.find((a) => a.code == item.code)
+      ["stocks"]?.find((a) => a.size == item.size).stock;
   };
 
   return (
@@ -299,8 +293,7 @@ const Cart = () => {
                       )} buah tersisa di stok.`}</div>
                     )}
                     <Item>
-                      {item.productId.data
-                        .filter((a) => a.code == item.code)
+                      {item.productId.data?.filter((a) => a.code == item.code)
                         .map((a, index) => (
                           <Link
                             to={"/products/detail/" + item.productId.slug}
@@ -329,8 +322,7 @@ const Cart = () => {
                           </Exit>
                         </div>
                         <div className="color-size mt-0.5 flex flex-row text-gray-500 text-base font-semibold">
-                          {item.productId.data
-                            .filter((a) => a.code == item.code)
+                          {item.productId.data?.filter((a) => a.code == item.code)
                             .map((a) => (
                               <div key={a.code} className="color lowercase ">
                                 {a.colorId.name}
@@ -345,7 +337,7 @@ const Cart = () => {
                         <div className="price mt-0.5 font-bold text-base">
                           Rp
                           <span className="text-lg">
-                            {item.productId.price.toLocaleString()}
+                            {item.productId.price?.toLocaleString()}
                           </span>
                         </div>
                         <div className="total flex lg:flex-row flex-col lg:items-center lg:justify-between">

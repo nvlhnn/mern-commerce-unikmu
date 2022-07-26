@@ -245,7 +245,6 @@ const List = () => {
       ? `${BASE_URL}/products?limit=${limit}&sortBy=${sort}&cat=${cat}&`
       : `${BASE_URL}/products?limit=${limit}&sortBy=${sort}&`;
 
-    console.log(url);
     if (search && search !== "") {
       url += "keyword=" + search + "&";
     }
@@ -270,7 +269,6 @@ const List = () => {
         const res = await axios
           .get(url)
           .then((res) => setProducts(res.data.result));
-        // .then(res => console.log(products));
         // setProducts(res.data);
       } catch (err) {}
     };
@@ -279,7 +277,6 @@ const List = () => {
 
   const handleSearch = () => {
     const value = document.getElementById("search-input").value;
-    // console.log(value)
     dispatch(update(value));
   };
 

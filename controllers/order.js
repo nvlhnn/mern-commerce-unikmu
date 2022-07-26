@@ -1,7 +1,9 @@
+/* eslint-disable no-undef */
 const Order = require("../models/order.js");
 const Cart = require("../models/cart.js");
 const { generateToken } = require("../config/midtrans.js");
 const moment = require("moment");
+const { default: axios } = require("axios");
 
 const generateMidtransToken = async (req, res) => {
   try {
@@ -121,12 +123,12 @@ const generateMidtransToken = async (req, res) => {
         recipient_name: "SUDARSONO",
       },
       callbacks: {
-        finish: "http://localhost:3000",
+        finish: process.env.FRONTEND_URL,
       },
       expiry: {
         // start_time: "2025-12-20 18:11:08 +0700",
         unit: "minute",
-        duration: 2,
+        duration: process.env.MIDTRANS_EXPIRED_TIME,
       },
     };
     let token = await generateToken(params);
@@ -154,10 +156,34 @@ const generateMidtransToken = async (req, res) => {
       .add(process.env.MIDTRANS_EXPIRED_TIME, "m")
       .toDate();
     await order.save();
-    // await cart.remove();
+    await cart.remove();
     console.log(token);
     res.status(200).json({ token: token, orderId: order._id });
   } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+const redirectToOrder = async (req, res) => {
+  try {
+    const { id } = req.query;
+    console.log({ id: req.query.id });
+    const resp = await axios.get(
+      `https://api.sandbox.midtrans.com/v2/${id}/status`,
+      {
+        headers: {
+          Authorization: btoa(process.env.MIDTRANS_SERVER_KEY + ":"),
+        },
+      }
+    );
+
+    // console.log(resp);
+
+    res.redirect(
+      process.env.FRONTEND_URL + "/transactions/detail/" + resp.data.order_id
+    );
+  } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 };
@@ -311,4 +337,5 @@ module.exports = {
   destroy,
   income,
   generateMidtransToken,
+  redirectToOrder,
 };

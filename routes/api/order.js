@@ -7,6 +7,7 @@ const {
   income,
   generateMidtransToken,
   getById,
+  redirectToOrder,
 } = require("../../controllers/order.js");
 
 const { notification } = require("../../config/midtrans.js");
@@ -15,6 +16,8 @@ const router = require("express").Router();
 const middleware = require("../../middleware");
 
 router.post("/notification", notification);
+router.post("/redirect-to-order", redirectToOrder);
+
 router.post(
   "/generate-token-midtrans",
   [middleware.auth],

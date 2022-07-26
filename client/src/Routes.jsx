@@ -69,7 +69,6 @@ function UserRoute() {
 
 function NonAuth() {
   const user = useSelector((state) => state.user);
-  console.log(user);
   if (user.currentUser && !user.error) {
     if (window.history.state?.usr) {
       return <Navigate to={window.history.state.usr} />;

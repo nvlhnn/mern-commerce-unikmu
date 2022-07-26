@@ -2,12 +2,19 @@
 const midtransClient = require("midtrans-client");
 const axios = require("axios");
 // const Order = require("../models/order.js");
+const dotenv = require("dotenv");
 
+dotenv.config();
+
+const serverKey = process.env.MIDTRANS_SERVER_KEY;
+const clientKey = process.env.MIDTRANS_CLIENT_KEY;
+
+console.log({ serverKey, clientKey });
 let snap = new midtransClient.Snap({
   // Set to true if you want Production Environment (accept real transaction).
   isProduction: false,
-  serverKey: "SB-Mid-server-ryqIOMaOzUUhJgXmreKW9X_u",
-  clientKey: "SB-Mid-client-gVE4X3zaEcJZh1N2",
+  serverKey: serverKey,
+  clientKey: clientKey,
 });
 
 const generateToken = async (params) => {

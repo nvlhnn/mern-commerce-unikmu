@@ -6,6 +6,7 @@ const Product = require("../models/product");
 const Color = require("../models/color");
 const Category = require("../models/category");
 // const { off } = require("../models/product");
+var slugify = require("slugify");
 
 dotenv.config({ path: "../.env" });
 
@@ -129,7 +130,8 @@ const seeding = async () => {
     uniqloData.forEach((item) => {
       let category = handleCategory(categories, item);
       let images = [];
-      let slug = item.name.replace(/\s+/g, "-").toLowerCase();
+      let slug = slugify(item.name).toLowerCase();
+      //  item.name.replace(/\s+/g, "-").toLowerCase();
       let data = handleData(colors, item);
 
       item.images.sub.forEach((img) => {

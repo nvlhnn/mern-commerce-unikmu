@@ -131,7 +131,6 @@ const Product = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log(product);
 
   const handleSubmit = () => {
     if (!token) {
