@@ -46,6 +46,6 @@ app.get("*", (req, res) => {
 
 // app.get("/*", (req, res) => res.send("Index Page"));
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log("conected to port 5000");
+app.listen(process.env.PORT || 3000, () => {
+  console.log("conected to port 3000");
 });
