@@ -278,7 +278,7 @@ const TransactionDetail = () => {
                     </Value>
                     <Key>order id</Key>
                     <Value className="break-words">{order._id}</Value>
-                    <Key>status</Key>
+                    <Key>payment status</Key>
                     <Value
                       className={
                         " text-lg font-bold " +
@@ -292,6 +292,12 @@ const TransactionDetail = () => {
                       }
                     >
                       {order.status}
+                    </Value>
+                    <Key>order status</Key>
+                    <Value>
+                      {moment().diff(moment(order.createdAt), "hours") > 3
+                        ? "closed"
+                        : "open"}
                     </Value>
                     <Key>shipping adress</Key>
                     <Value>{order.address}</Value>

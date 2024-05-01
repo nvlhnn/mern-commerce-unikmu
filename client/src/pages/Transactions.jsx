@@ -7,6 +7,7 @@ import { userRequest } from "../requestMethod";
 import Moment from "moment";
 import { Link } from "react-router-dom";
 import Nodefound from "../components/Notfound";
+import moment from "moment";
 // import { orders } from '../data'
 
 const Container = tw.div`
@@ -122,7 +123,7 @@ const Transactions = () => {
                     </Value>
                     <Key>order id</Key>
                     <Value className="break-words">{a._id}</Value>
-                    <Key>status</Key>
+                    <Key>payment status</Key>
                     <Value
                       className={
                         " text-lg font-bold " +
@@ -136,6 +137,12 @@ const Transactions = () => {
                       }
                     >
                       {a.status}
+                    </Value>
+                    <Key>order status</Key>
+                    <Value>
+                      {moment().diff(moment(a.createdAt), "hours") > 3
+                        ? "closed"
+                        : "open"}
                     </Value>
                     <Key>shipping adress</Key>
                     <Value>{a.address}</Value>

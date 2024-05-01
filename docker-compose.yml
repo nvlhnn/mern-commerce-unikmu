@@ -14,7 +14,7 @@ services:
       - ADMIN_PASS=admin
       - MIDTRANS_EXPIRED_TIME=15 
       - NODE_ENV=production
-      - FRONTEND_URL=https://1e94-103-105-35-70.ap.ngrok.io
+      - FRONTEND_URL=https://unikmu.fly.dev
       - PORT=3000
     ports:
       - "3000:3000"

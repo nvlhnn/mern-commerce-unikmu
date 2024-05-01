@@ -131,6 +131,14 @@ const Cart = () => {
         .map((a) => a.productId.price * a.qty)
         .reduce((total, val) => total + val, 0)
     : 0;
+  const coupons =
+    Math.floor(totalPrice / 100000) +
+    (cart
+      ? cart.products
+          .map((a) => (a.productId.price > 50000 ? 1 * a.qty : 0))
+          .reduce((total, val) => total + val, 0)
+      : 0);
+
   const [cartExceed, setCartExceed] = useState(false);
   const { token, user } = useSelector((state) => state.user.currentUser);
   const [address, setAddress] = useState(null);
@@ -167,7 +175,8 @@ const Cart = () => {
         cart.products?.find(
           (a) =>
             a.qty >
-            a.productId.data?.find((b) => b.code == a.code)
+            a.productId.data
+              ?.find((b) => b.code == a.code)
               .stocks?.find((c) => c.size == a.size).stock
         ) != null
       );
@@ -256,7 +265,8 @@ const Cart = () => {
   }, [address]);
 
   const getCurrentStock = (item) => {
-    return item.productId.data?.find((a) => a.code == item.code)
+    return item.productId.data
+      ?.find((a) => a.code == item.code)
       ["stocks"]?.find((a) => a.size == item.size).stock;
   };
 
@@ -293,7 +303,8 @@ const Cart = () => {
                       )} buah tersisa di stok.`}</div>
                     )}
                     <Item>
-                      {item.productId.data?.filter((a) => a.code == item.code)
+                      {item.productId.data
+                        ?.filter((a) => a.code == item.code)
                         .map((a, index) => (
                           <Link
                             to={"/products/detail/" + item.productId.slug}
@@ -322,7 +333,8 @@ const Cart = () => {
                           </Exit>
                         </div>
                         <div className="color-size mt-0.5 flex flex-row text-gray-500 text-base font-semibold">
-                          {item.productId.data?.filter((a) => a.code == item.code)
+                          {item.productId.data
+                            ?.filter((a) => a.code == item.code)
                             .map((a) => (
                               <div key={a.code} className="color lowercase ">
                                 {a.colorId.name}
@@ -384,6 +396,12 @@ const Cart = () => {
                     <span className="text-lg">
                       {totalPrice.toLocaleString()}
                     </span>
+                  </SumValue>
+                </Summary>
+                <Summary>
+                  <SumTitle>Coupons Total</SumTitle>
+                  <SumValue>
+                    <span className="text-lg">{coupons}</span>
                   </SumValue>
                 </Summary>
                 <Summary>
