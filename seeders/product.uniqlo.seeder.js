@@ -166,9 +166,90 @@ const seeding = async () => {
   }
 };
 
+const seedCategory = async () => {
+  const categories = [
+    {
+      name: "pria",
+      slug: "pria",
+    },
+    {
+      name: "anak",
+      slug: "anak",
+    },
+    {
+      name: "bayi",
+      slug: "bayi",
+    },
+    {
+      name: "wanita",
+      slug: "wanita",
+    },
+  ];
+
+  await Category.deleteMany({});
+  await Category.insertMany(categories);
+};
+
+const seedColor = async () => {
+  const colors = [
+    {
+      name: "yellow",
+      hex: "#E8C13E",
+      slug: "yellow",
+    },
+    {
+      name: "white",
+      hex: "#F2F2F2",
+      slug: "white",
+    },
+    {
+      name: "brown",
+      hex: "#804B3D",
+      slug: "brown",
+    },
+    {
+      name: "orange",
+      hex: "#FF8500",
+      slug: "orange",
+    },
+    {
+      name: "purple",
+      hex: "#685572",
+      slug: "purple",
+    },
+    {
+      name: "green",
+      hex: "#00916A",
+      slug: "green",
+    },
+    {
+      name: "gray",
+      hex: "#999B9A",
+      slug: "gray",
+    },
+    {
+      name: "red",
+      hex: "#C2374C",
+      slug: "red",
+    },
+    {
+      name: "blue",
+      hex: "#2760A7",
+      slug: "blue",
+    },
+  ];
+
+  await Color.deleteMany({});
+  await Color.insertMany(colors);
+};
+
 const seedDB = async () => {
+  await seedCategory();
+  await seedColor();
+
+  console.log(await getCategories());
   const products = await seeding();
-  console.log(products.map((a) => a.slug));
+  // console.log(products.map((a) => a.slug));
   await Product.deleteMany({});
   await Product.insertMany(products);
 };
